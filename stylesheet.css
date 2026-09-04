@@ -1,0 +1,121 @@
+.task-widget {
+    background-color: rgba(20, 20, 20, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px 12px 8px;
+    color: #f5f5f4;
+    font-family: 'Cantarell', 'Noto Sans', sans-serif;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+
+.task-header {
+    min-width: 230px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+
+.task-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f6f6f6;
+    text-align: center;
+}
+
+.task-month-bar {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.task-month-label {
+    color: #b7b7b7;
+    font-size: 12px;
+    text-align: center;
+}
+
+.task-month-button {
+    background: transparent;
+    border: none;
+    color: #d7d7d7;
+    min-width: 24px;
+    padding: 0;
+    font-size: 20px;
+}
+
+.task-columns {
+    spacing: 10px;
+}
+
+.task-column {
+    spacing: 3px;
+}
+
+.task-day-row {
+    spacing: 5px;
+    height: 26px;
+}
+
+.task-day-index {
+    font-size: 15px;
+    color: #ebebeb;
+    width: 26px;
+    text-align: right;
+}
+
+.task-day-toggle {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    padding: 0;
+    min-width: 26px;
+    width: 26px;
+    height: 26px;
+    color: #f5f5f5;
+    font-size: 14px;
+    text-align: center;
+}
+
+.task-day-toggle:checked {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.task-day-toggle:insensitive {
+    color: rgba(255, 255, 255, 0.38);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+.task-day-today .task-day-index {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.task-day-today .task-day-toggle {
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+.task-window-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f5f5f5;
+}
+
+.task-context-menu {
+    background-color: rgba(24, 24, 24, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 6px;
+    spacing: 4px;
+}
+
+.task-context-menu .popup-menu-item,
+.task-context-menu .menu-item {
+    padding: 8px 12px;
+    color: #f5f5f5;
+    font-size: 12px;
+}
+
+.task-context-menu .popup-menu-item:hover,
+.task-context-menu .menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.daymark" path="/org/gnome/shell/extensions/daymark/">
+    <key name="tasks-json" type="s">
+      <default>'{"tasks":[]}'</default>
+      <summary>Task storage</summary>
+      <description>Serialized JSON task data.</description>
+    </key>
+    <key name="allow-future-days" type="b">
+      <default>false</default>
+      <summary>Allow future day marking</summary>
+      <description>When enabled, users can mark future task days.</description>
+    </key>
+  </schema>
+</schemalist>
