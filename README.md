@@ -1,28 +1,44 @@
 # Daymark
 
-Daymark is a lightweight GNOME Shell extension that places draggable task widgets on the desktop and tracks daily completion history for long-running goals.
+Daymark is a lightweight GNOME Shell extension that places draggable task widgets on your desktop and tracks daily completion history for long-running goals.
 
-## Layout
+## Project Structure
 
-- `extension.js` — desktop widget runtime
-- `prefs.js` — task management UI
-- `stylesheet.css` — dark minimal styling
+- `extension.js` — Desktop widget runtime
+- `prefs.js` — Task management preferences UI
+- `stylesheet.css` — Dark minimal styling
 - `metadata.json` — GNOME extension manifest
-- `schemas/org.gnome.shell.extensions.daymark.gschema.xml` — persistent settings schema
-- `src/` — date and task management helpers
+- `schemas/org.gnome.shell.extensions.daymark.gschema.xml` — Persistent settings schema
+- `src/` — Date and task management helpers
+- `install.sh` — Installation helper script
 
-## Install on GNOME
+## Installation
 
-* Install it from Extention Manager
--OR-
+### Method 1: Using the Install Script (Recommended)
 
-1. Copy this folder to:
-   ~/.local/share/gnome-shell/extensions/daymark@local
-2. Compile the schema:
+Run the installation script to automatically copy files to the GNOME extensions directory and compile schemas:
+
+```bash
+chmod +x install.sh
+./install.sh
+```
+
+### Method 2: Manual Installation
+
+1. Copy this folder to the GNOME extensions directory:
+   ```bash
+   mkdir -p ~/.local/share/gnome-shell/extensions/daymark@local
+   cp -r . ~/.local/share/gnome-shell/extensions/daymark@local
+   ```
+
+2. Compile the GSettings schema:
+   ```bash
    glib-compile-schemas ~/.local/share/gnome-shell/extensions/daymark@local/schemas
-3. Restart GNOME Shell or log out and back in.
-4. Enable the extension from Extensions.
+   ```
 
+3. Restart GNOME Shell (log out and log back in, or press `Alt + F2`, type `r`, and hit `Enter` on X11).
 
-
-The helper copies the extension into the GNOME user extension directory and recompiles the schema.
+4. Enable the extension via **GNOME Extensions** or **Extension Manager**:
+   ```bash
+   gnome-extensions enable daymark@local
+   ```
