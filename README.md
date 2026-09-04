@@ -1,6 +1,6 @@
 # Daymark
 
-Daymark is a lightweight GNOME Shell extension that places draggable task widgets on your desktop and tracks daily completion history for long-running goals.
+Daymark is a lightweight GNOME Shell extension that places draggable widgets on your desktop and tracks daily completion history for long-running goals.
 
 ## Project Structure
 
