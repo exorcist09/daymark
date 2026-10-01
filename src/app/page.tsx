@@ -108,19 +108,19 @@ export default function Daymark() {
   const columns = useMemo(() => generateCalendarGrid(data), [data]);
 
   return (
-    <main className="min-h-screen bg-black flex flex-col items-center justify-center p-4 select-none">
+    <main className="min-h-screen bg-[#090d14] flex flex-col items-center justify-center p-4 select-none">
       {/* Main Graph Card */}
-      <div className="w-full max-w-xl md:max-w-2xl bg-[#090909] border border-neutral-900 rounded-2xl py-8 px-6 sm:px-12 flex items-center justify-center shadow-[0_0_60px_rgba(0,0,0,0.9)] transition-all">
-        <div className="flex justify-between w-full items-center">
+      <div className="bg-[#0d121b] border border-[#1b2332] rounded-2xl p-6 sm:p-8 flex items-center justify-center shadow-2xl">
+        <div className="flex gap-2.5 items-center">
           {columns.map((col) => (
-            <div key={col.id} className="flex flex-col gap-3 items-center">
+            <div key={col.id} className="flex flex-col gap-2.5 items-center">
               {col.days.map((cell) => {
                 if (!cell.isInWindow && cell.status === 'PAST') {
                   // Cell outside 30-day window in first week column
                   return (
                     <div
                       key={cell.dateKey}
-                      className="w-4 h-3.5 opacity-0 pointer-events-none"
+                      className="w-7 h-7 sm:w-8 sm:h-8 opacity-0 pointer-events-none"
                     />
                   );
                 }
@@ -128,6 +128,13 @@ export default function Daymark() {
                 const isTodayCell = cell.status === 'TODAY';
                 const isFutureCell = cell.status === 'FUTURE';
                 const cellWorked = isTodayCell ? todayWorked : cell.worked;
+
+                let tileColor = 'bg-[#18212e]'; // Inactive tile from screenshot
+                if (isFutureCell) {
+                  tileColor = 'bg-[#121822] opacity-40';
+                } else if (cellWorked) {
+                  tileColor = 'bg-[#1e7239]'; // Dark green tile from screenshot
+                }
 
                 let statusLabel = cellWorked ? 'Worked' : "Didn't work";
                 if (isTodayCell) {
@@ -137,23 +144,17 @@ export default function Daymark() {
                 }
 
                 return (
-                  <div key={cell.dateKey} className="relative group w-4 h-3.5 flex items-center justify-center">
+                  <div key={cell.dateKey} className="relative group">
                     <div
-                      className={`transition-all duration-200 cursor-default ${
-                        cellWorked
-                          ? 'w-4 h-2.5 rounded-lg bg-[#238636]'
-                          : isFutureCell
-                          ? 'w-2.5 h-2.5 rounded-full bg-[#141414] border border-neutral-800/40'
-                          : 'w-2.5 h-2.5 rounded-full bg-neutral-800'
-                      } ${
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg transition-colors cursor-default ${tileColor} ${
                         isTodayCell
-                          ? 'ring-1 ring-neutral-400/40 ring-offset-1 ring-offset-black'
+                          ? 'ring-1 ring-neutral-400/50 ring-offset-1 ring-offset-[#0d121b]'
                           : ''
                       }`}
                     />
 
                     {/* Tooltip on hover */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 bg-[#121212] border border-neutral-800 text-[11px] font-mono text-neutral-300 rounded-md shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-150 z-30 flex flex-col items-center">
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 bg-[#141b26] border border-[#222d3d] text-[11px] font-mono text-neutral-300 rounded-md shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-150 z-30 flex flex-col items-center">
                       <span className="text-neutral-200 font-medium">{cell.dateKey}</span>
                       <span className="text-[10px] text-neutral-400">{statusLabel}</span>
                     </div>
@@ -171,16 +172,14 @@ export default function Daymark() {
           onClick={handleToggleToday}
           disabled={!isLoaded}
           aria-label={`Toggle work for today (${todayDateKey})`}
-          className="group flex items-center gap-2.5 px-4 py-2 rounded-full border border-neutral-800/90 hover:border-neutral-700 bg-[#090909] hover:bg-neutral-900 transition-all cursor-pointer select-none active:scale-95 shadow-sm"
+          className="group flex items-center gap-2.5 px-4 py-2 rounded-xl border border-[#1b2332] hover:border-[#2a374d] bg-[#0d121b] hover:bg-[#121824] transition-all cursor-pointer select-none active:scale-95 shadow-sm"
         >
           <span
-            className={`transition-all duration-200 ${
-              todayWorked
-                ? 'w-4 h-2.5 rounded-lg bg-[#238636]'
-                : 'w-2.5 h-2.5 rounded-full bg-neutral-600 group-hover:bg-neutral-500'
+            className={`w-3.5 h-3.5 rounded-[5px] transition-colors ${
+              todayWorked ? 'bg-[#1e7239]' : 'bg-[#18212e]'
             }`}
           />
-          <span className="text-xs font-mono text-neutral-400 group-hover:text-neutral-300 transition-colors ml-0.5">
+          <span className="text-xs font-mono text-neutral-400 group-hover:text-neutral-300 transition-colors">
             {todayDateKey}
           </span>
         </button>
