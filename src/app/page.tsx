@@ -108,9 +108,9 @@ export default function Daymark() {
   const columns = useMemo(() => generateCalendarGrid(data), [data]);
 
   return (
-    <main className="min-h-screen bg-[#090d14] flex flex-col items-center justify-center p-4 select-none">
+    <main className="min-h-screen bg-black flex flex-col items-center justify-center p-4 select-none">
       {/* Main Graph Card */}
-      <div className="bg-[#0d121b] border border-[#1b2332] rounded-2xl p-6 sm:p-8 flex items-center justify-center shadow-2xl">
+      <div className="bg-black border border-neutral-900 rounded-2xl p-6 sm:p-8 flex items-center justify-center shadow-2xl">
         <div className="flex gap-2.5 items-center">
           {columns.map((col) => (
             <div key={col.id} className="flex flex-col gap-2.5 items-center">
@@ -148,7 +148,7 @@ export default function Daymark() {
                     <div
                       className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg transition-colors cursor-default ${tileColor} ${
                         isTodayCell
-                          ? 'ring-1 ring-neutral-400/50 ring-offset-1 ring-offset-[#0d121b]'
+                          ? 'ring-1 ring-neutral-400/50 ring-offset-1 ring-offset-black'
                           : ''
                       }`}
                     />
@@ -172,7 +172,7 @@ export default function Daymark() {
           onClick={handleToggleToday}
           disabled={!isLoaded}
           aria-label={`Toggle work for today (${todayDateKey})`}
-          className="group flex items-center gap-2.5 px-4 py-2 rounded-xl border border-[#1b2332] hover:border-[#2a374d] bg-[#0d121b] hover:bg-[#121824] transition-all cursor-pointer select-none active:scale-95 shadow-sm"
+          className="group flex items-center gap-2.5 px-4 py-2 rounded-xl border border-neutral-900 hover:border-neutral-800 bg-black hover:bg-neutral-950 transition-all cursor-pointer select-none active:scale-95 shadow-sm"
         >
           <span
             className={`w-3.5 h-3.5 rounded-[5px] transition-colors ${
