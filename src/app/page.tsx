@@ -110,17 +110,17 @@ export default function Daymark() {
   return (
     <main className="min-h-screen bg-black flex flex-col items-center justify-center p-4 select-none">
       {/* Main Graph Card */}
-      <div className="w-full max-w-xl md:max-w-2xl bg-[#090909] border border-neutral-900 rounded-2xl py-8 px-6 sm:px-12 flex items-center justify-center shadow-[0_0_60px_rgba(0,0,0,0.9)] transition-all">
-        <div className="flex justify-between w-full items-center">
+      <div className="bg-[#090909] border border-neutral-900 rounded-lg px-8 py-5 flex items-center justify-center shadow-lg">
+        <div className="flex gap-1.5 items-center">
           {columns.map((col) => (
-            <div key={col.id} className="flex flex-col gap-3 items-center">
+            <div key={col.id} className="flex flex-col gap-1.5 items-center">
               {col.days.map((cell) => {
                 if (!cell.isInWindow && cell.status === 'PAST') {
                   // Cell outside 30-day window in first week column
                   return (
                     <div
                       key={cell.dateKey}
-                      className="w-3.5 h-3.5 opacity-0 pointer-events-none"
+                      className="w-2.5 h-2.5 opacity-0 pointer-events-none"
                     />
                   );
                 }
@@ -129,11 +129,11 @@ export default function Daymark() {
                 const isFutureCell = cell.status === 'FUTURE';
                 const cellWorked = isTodayCell ? todayWorked : cell.worked;
 
-                let dotColor = 'bg-neutral-800'; // Default past not worked
+                let dotColor = 'bg-neutral-800'; // Past not worked
                 if (isFutureCell) {
-                  dotColor = 'bg-neutral-900 border border-neutral-800/50';
+                  dotColor = 'bg-[#141414] border border-neutral-800/40';
                 } else if (cellWorked) {
-                  dotColor = 'bg-emerald-500 shadow-[0_0_8px_rgba(34,197,94,0.55)]';
+                  dotColor = 'bg-[#238636]'; // Dark green, no gradient
                 }
 
                 let statusLabel = cellWorked ? 'Worked' : "Didn't work";
@@ -146,16 +146,14 @@ export default function Daymark() {
                 return (
                   <div key={cell.dateKey} className="relative group">
                     <div
-                      className={`w-3.5 h-3.5 rounded-full transition-all duration-200 cursor-default ${dotColor} ${
-                        isTodayCell
-                          ? 'ring-1 ring-neutral-400/50 ring-offset-1 ring-offset-black'
-                          : ''
+                      className={`w-2.5 h-2.5 rounded-full transition-colors cursor-default ${dotColor} ${
+                        isTodayCell ? 'ring-1 ring-neutral-400/40 ring-offset-1 ring-offset-black' : ''
                       }`}
                     />
 
                     {/* Tooltip on hover */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 bg-[#121212] border border-neutral-800 text-[11px] font-mono text-neutral-300 rounded-md shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-150 z-30 flex flex-col items-center">
-                      <span className="text-neutral-200 font-medium">{cell.dateKey}</span>
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-[#121212] border border-neutral-800 text-[11px] font-mono text-neutral-300 rounded shadow-md whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-30 flex flex-col items-center">
+                      <span className="text-neutral-200">{cell.dateKey}</span>
                       <span className="text-[10px] text-neutral-400">{statusLabel}</span>
                     </div>
                   </div>
@@ -167,23 +165,19 @@ export default function Daymark() {
       </div>
 
       {/* Interactive Toggle for Today below the graph */}
-      <div className="mt-8 flex justify-center">
+      <div className="mt-6 flex justify-center">
         <button
           onClick={handleToggleToday}
           disabled={!isLoaded}
           aria-label={`Toggle work for today (${todayDateKey})`}
-          className="group flex items-center gap-2.5 px-4 py-2 rounded-full border border-neutral-800/90 hover:border-neutral-700 bg-[#090909] hover:bg-neutral-900 transition-all cursor-pointer select-none active:scale-95 shadow-sm"
+          className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-neutral-800/90 hover:border-neutral-700 bg-[#090909] hover:bg-neutral-900 transition-colors cursor-pointer select-none active:scale-95"
         >
-          <span className="text-neutral-500 text-sm font-mono">[</span>
           <span
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${
-              todayWorked
-                ? 'bg-emerald-500 shadow-[0_0_8px_rgba(34,197,94,0.7)]'
-                : 'bg-neutral-600 group-hover:bg-neutral-500'
+            className={`w-2.5 h-2.5 rounded-full transition-colors ${
+              todayWorked ? 'bg-[#238636]' : 'bg-neutral-700'
             }`}
           />
-          <span className="text-neutral-500 text-sm font-mono">]</span>
-          <span className="text-xs font-mono text-neutral-400 group-hover:text-neutral-300 transition-colors ml-0.5">
+          <span className="text-xs font-mono text-neutral-400">
             {todayDateKey}
           </span>
         </button>
